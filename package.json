@@ -1,0 +1,26 @@
+{
+  "name": "veriador",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vagnersampaio92/veriador.git"
+  },
+  "author": "Vagner Sampaio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vagnersampaio92/veriador/issues"
+  },
+  "homepage": "https://github.com/vagnersampaio92/veriador#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sucrase": "^3.15.0"
+  }
+}
