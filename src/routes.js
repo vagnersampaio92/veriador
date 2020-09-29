@@ -1,16 +1,13 @@
 import { Router } from 'express';
 import Admins from './app/models/Admins'
 
+import AdminController from './app/controllers/AdminController'
+
+import SessionController from './app/controllers/SessionController'
+
 const routes = new Router();
 
-routes.get('/',async (req, res)=>{
-    const admin = await Admins.create({
-       name:'jshdjsh',
-       email:'jshjhfshjshjdhsdjsh',
-       password_hash:'12121121'
-
-    })
-    return res.json(admin)
-})
+routes.post('/cadastra', AdminController.store)
+routes.post('/sessionsadmin', SessionController.store)
 
 export default  routes;
