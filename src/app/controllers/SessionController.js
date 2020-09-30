@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { username } from '../../config/database'
-
+require('dotenv').config()
 import Admin from '../models/Admins'
 
 class SessionAdmin {
@@ -15,15 +14,17 @@ class SessionAdmin {
         if(!(await admin.checkPassword(password))){
             return res.status(401).json({ error: 'User not found'})
         } 
-        const { id, name } = admin
-
+        const { id, name, provider } = admin
+      
         return res.json({
             user:{
                 id,
                 name,
                 email,
+                provider,
             },
-            token: jwt.sign({id},process.env.SECRET, {
+           
+            token: jwt.sign({id, provider},process.env.SECRET, {
                 expiresIn: '7d'
             }),
         })
