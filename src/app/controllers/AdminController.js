@@ -15,17 +15,30 @@ class AdminController{
             return res.status(400).json({error: 'Validation fails admin'})
         }
 
-        const userExists = await Admin.findOne({
-            where:{
-                email:req.body.email
+        if(req.userProvider){
+
+            try{
+                const userExists = await Admin.findOne({
+                    where:{
+                        email:req.body.email
+                    }
+                })
+                if(!userExists){
+                    const {id, name, email, provider } = await Admin.create(req.body);
+                    return res.json({id, name, email, provider });
+                }
+                
+                return res.status(400).json({error: "Já cadastrado"});
+
+            }catch(error){
+                return res.status(401).json({ error: 'erro' })
             }
-        })
-        if(!userExists){
-            const {id, name, email, provider } = await Admin.create(req.body);
-            return res.json({id, name, email, provider });
+
+            
         }
-        
-        return res.status(400).json({error: "Já cadastrado"});
+
+        return res.status(400).json({error: "permission denied"});
+      
         
     }    
 
