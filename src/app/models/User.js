@@ -2,7 +2,7 @@ import Sequelize, { Model } from 'sequelize'
 import bcrypt from 'bcryptjs'
 
 
-class Admin extends Model{
+class User extends Model{
 
     static init(sequelize){
         super.init({
@@ -10,13 +10,12 @@ class Admin extends Model{
             email: Sequelize.STRING,
             password: Sequelize.VIRTUAL,
             password_hash: Sequelize.STRING,
-            provider: Sequelize.BOOLEAN
         },{
             sequelize
         })
-        this.addHook('beforeSave',async (admin)=>{
-            if(admin.password){
-                admin.password_hash= await bcrypt.hash(admin.password,8)
+        this.addHook('beforeSave',async (user)=>{
+            if(user.password){
+                user.password_hash= await bcrypt.hash(user.password,8)
             }
         })
 
@@ -29,4 +28,4 @@ class Admin extends Model{
 
 }
 
-export default Admin;
+export default User;

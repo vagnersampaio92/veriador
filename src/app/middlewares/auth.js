@@ -12,9 +12,13 @@ export default async( req, res, next) =>{
 
     try{
         const decoded =  await promisify(jwt.verify)(token, process.env.SECRET) // promisify transforma funções de call back para asyn await
+  
 
        req.userId = decoded.id
-       req.userProvider = decoded.provider
+       if(decoded.provider != undefined){
+        req.userProvider = decoded.provider
+       }
+       
         return next();
 
     }catch(err){
