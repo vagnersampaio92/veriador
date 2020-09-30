@@ -1,8 +1,20 @@
 import Admin from '../models/Admins'
 
-class UserController{
+import * as Yup from 'yup'
+
+class AdminController{
 
     async store(req, res){
+        const schema = Yup.object().shape({
+            name:Yup.string().required(),
+            email:Yup.string().required(),
+            password: Yup.string().required().min(4)
+        })
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({error: 'Validation fails'})
+        }
+
         const userExists = await Admin.findOne({
             where:{
                 email:req.body.email
@@ -25,4 +37,4 @@ class UserController{
     }
 }
 
-export default new UserController()
+export default new AdminController()
