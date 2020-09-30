@@ -5,13 +5,13 @@ import SessionController from './app/controllers/SessionController'
 import SessionControllerUser from './app/controllers/SessionControllerUser'
 import UserController from './app/controllers/UserController'
 import ComplaintController from './app/controllers/ComplaintController'
-import authadm from './app/middlewares/auth'
+import auth from './app/middlewares/auth'
 
 const routes = new Router();
 //adm e assessor
-routes.post('/cadastra', AdminController.store)
+routes.post('/cadastra', auth, AdminController.store)
 routes.post('/sessionsadmin', SessionController.store)
-// routes.put('/updateadmin', authadm, AdminController.update)
+// routes.put('/updateadmin', auth, AdminController.update)
 
 //usuário
 
@@ -20,8 +20,9 @@ routes.post('/sessionsuser', SessionControllerUser.store)
 
 //Reclamações
 
-routes.post('/cadastracomplaint',  authadm, ComplaintController.store)
-routes.get('/listatodasreclamacoes', ComplaintController.ListAllComplaints)
+routes.post('/cadastracomplaint',  auth, ComplaintController.store)
+routes.get('/listatodasreclamacoes',auth, ComplaintController.ListAllComplaints)
+routes.put('/editareclamacoes/:id',auth, ComplaintController.edit)
 
 
 
