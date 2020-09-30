@@ -1,35 +1,38 @@
 'use strict';
 
-const { password } = require("../../config/database");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.createTable('admins', {
+    await queryInterface.createTable('complaints', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
+      description: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      password_hash: {
+      status: {
         type: Sequelize.STRING,
         allowNull: false,
 
       },
-      provider: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      id_user: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {         
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       created_at: {
         allowNull: false,
@@ -39,15 +42,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-
-
     });
 
   },
 
-  down: async (queryInterface) => {
+  down: async (queryInterface, Sequelize) => {
 
-    await queryInterface.dropTable('admins');
+      await queryInterface.dropTable('complaints');
 
   }
 };
