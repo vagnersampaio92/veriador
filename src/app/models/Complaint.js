@@ -14,10 +14,7 @@ class Complaint extends Model{
         },{
             sequelize
         })
-        .associate = models => {
-            belongsTo(models.users, { foreignKey: 'id_user' })
-    
-        }
+        
         return this
     }
 

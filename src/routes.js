@@ -21,6 +21,7 @@ routes.post('/sessionsuser', SessionControllerUser.store)
 //Reclamações
 
 routes.post('/cadastracomplaint', ComplaintController.store)
+routes.get('/listatodasreclamacoes', ComplaintController.ListAllComplaints)
 
 
 
