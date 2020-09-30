@@ -9,7 +9,7 @@ class Complaint extends Model{
             title: Sequelize.STRING,
             description: Sequelize.STRING,
             status: Sequelize.STRING,
-            id_user:Sequelize.INTEGER
+            user_id:Sequelize.INTEGER
             
         },{
             sequelize

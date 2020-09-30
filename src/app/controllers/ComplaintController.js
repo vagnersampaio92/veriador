@@ -12,10 +12,25 @@ import Photos from '../models/Photos'
 class ComplaintController{
 
     async store(req, res){
-        
-        const complaint = await Complaint.create(req.body)
+        let {complaint, photos} = req.body
+        try{
+            complaint.user_id=req.userId
+            complaint.status='aguardando'
+            const {id} = await Complaint.create(complaint)
+            photos.map(async(photo) => {
+                photo.complaint_id=id
+                const newphoto = await Photos.create(photo)
+            })
 
-        return res.json(complaint)
+            return res.status(200).json(id)
+
+        }catch(err){
+            return res.status(401).json({ error: 'erro'})
+        }
+    
+        
+
+        
     }
     async ListAllComplaints(req, res){
 

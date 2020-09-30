@@ -17,14 +17,14 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+   
       },
       status: {
         type: Sequelize.STRING,
         allowNull: false,
 
       },
-      id_user: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {         
